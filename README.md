@@ -21,7 +21,7 @@ package main
 
 import (
   "fmt"
-  "github.com/mytrile/wunderlist"
+  "github.com/mytrile/semaphoreci"
 )
 
 func main() {
