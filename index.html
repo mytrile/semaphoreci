@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <title>Semaphoreci by mytrile</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="inner">
+
+        <header>
+          <h1>Semaphoreci</h1>
+          <h2>Simple Go wrapper for Semaphore CI</h2>
+        </header>
+
+        <section id="downloads" class="clearfix">
+          <a href="https://github.com/mytrile/semaphoreci/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
+          <a href="https://github.com/mytrile/semaphoreci/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
+          <a href="https://github.com/mytrile/semaphoreci" id="view-on-github" class="button"><span>View on GitHub</span></a>
+        </section>
+
+        <hr>
+
+        <section id="main_content">
+          <h1>
+<a name="semaphoreci" class="anchor" href="#semaphoreci"><span class="octicon octicon-link"></span></a>semaphoreci</h1>
+
+<p>semaphoreci is Go wrapper for <a href="https://semaphoreapp.com/">Semaphore</a> <a href="http://docs.semaphoreapp.com/api">official API</a>.
+You can find Go package documentation <a href="http://godoc.org/github.com/mytrile/semaphoreci">here</a>.</p>
+
+<ul>
+<li><a href="#users-projects">User's projects</a></li>
+<li><a href="#projects-branches">Project’s branches</a></li>
+<li><a href="#branch-status">Branch Status</a></li>
+<li><a href="#branch-history">Branch History</a></li>
+<li><a href="#build-information">Build Information</a></li>
+<li><a href="#build-log">Build Log</a></li>
+</ul><h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<pre><code>  $ go get github.com/mytrile/semaphoreci
+</code></pre>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight"><pre><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+  <span class="s">"fmt"</span>
+  <span class="s">"github.com/mytrile/semaphoreci"</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">client</span>  <span class="o">:=</span> <span class="nx">semaphoreci</span><span class="p">.</span><span class="nx">NewClient</span><span class="p">(</span><span class="s">"auth_token"</span><span class="p">)</span>
+  <span class="nx">project</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">Project</span><span class="p">(</span><span class="nx">hash_id</span><span class="p">)</span>
+  <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3>
+<a name="users-projects" class="anchor" href="#users-projects"><span class="octicon octicon-link"></span></a><a href="http://docs.semaphoreapp.com/api#projects">User's projects</a>
+</h3>
+
+<div class="highlight"><pre><span class="nx">projects</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">Projects</span><span class="p">()</span>
+</pre></div>
+
+<h3>
+<a name="projects-branches" class="anchor" href="#projects-branches"><span class="octicon octicon-link"></span></a><a href="http://docs.semaphoreapp.com/api#branches">Project’s branches</a>
+</h3>
+
+<div class="highlight"><pre><span class="nx">branches</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">project</span><span class="p">.</span><span class="nx">Branches</span><span class="p">()</span>
+</pre></div>
+
+<h3>
+<a name="branch-status" class="anchor" href="#branch-status"><span class="octicon octicon-link"></span></a><a href="http://docs.semaphoreapp.com/api#branch_status">Branch Status</a>
+</h3>
+
+<div class="highlight"><pre><span class="nx">branches</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">project</span><span class="p">.</span><span class="nx">BranchStatus</span><span class="p">(</span><span class="nx">branch_id</span><span class="p">)</span>
+</pre></div>
+
+<h3>
+<a name="branch-history" class="anchor" href="#branch-history"><span class="octicon octicon-link"></span></a><a href="http://docs.semaphoreapp.com/api#branch_history">Branch History</a>
+</h3>
+
+<div class="highlight"><pre><span class="nx">branches</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">project</span><span class="p">.</span><span class="nx">BranchHistory</span><span class="p">(</span><span class="nx">branch_id</span><span class="p">)</span>
+</pre></div>
+
+<h3>
+<a name="build-information" class="anchor" href="#build-information"><span class="octicon octicon-link"></span></a><a href="http://docs.semaphoreapp.com/api#build_information">Build Information</a>
+</h3>
+
+<div class="highlight"><pre><span class="nx">branches</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">project</span><span class="p">.</span><span class="nx">BuildInfo</span><span class="p">(</span><span class="nx">branch_id</span><span class="p">,</span> <span class="nx">build_num</span><span class="p">)</span>
+</pre></div>
+
+<h3>
+<a name="build-log" class="anchor" href="#build-log"><span class="octicon octicon-link"></span></a><a href="http://docs.semaphoreapp.com/api#build_log">Build Log</a>
+</h3>
+
+<div class="highlight"><pre><span class="nx">branches</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">project</span><span class="p">.</span><span class="nx">BuildLog</span><span class="p">(</span><span class="nx">branch_id</span><span class="p">,</span> <span class="nx">build_num</span><span class="p">)</span>
+</pre></div>
+
+<h3>
+<a name="meta" class="anchor" href="#meta"><span class="octicon octicon-link"></span></a>Meta</h3>
+
+<ul>
+<li>Author  - Dimitar Kostov</li>
+<li>Email   - <a href="mailto:mitko.kostov@gmail.com">mitko.kostov@gmail.com</a>
+</li>
+<li>Blog    - <a href="http://mytrile.github.io">http://mytrile.github.io</a>
+</li>
+<li>Twitter - <a href="https://twitter.com/mytrile">mytrile</a>
+</li>
+</ul><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>(The MIT License)</p>
+
+<p>Copyright (c) 2013 Dimitar Kostov <a href="mailto:mitko.kostov@gmail.com">mitko.kostov@gmail.com</a></p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+        </section>
+
+        <footer>
+          Semaphoreci is maintained by <a href="https://github.com/mytrile">mytrile</a><br>
+          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
+        </footer>
+
+        
+      </div>
+    </div>
+  </body>
+</html>
