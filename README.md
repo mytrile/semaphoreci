@@ -12,7 +12,7 @@ You can find Go package documentation [here](http://godoc.org/github.com/mytrile
 
 ## Installation
 
-      $ go install github.com/mytrile/semaphoreci
+      $ go get github.com/mytrile/semaphoreci
 
 ## Usage
 
